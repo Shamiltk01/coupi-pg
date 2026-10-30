@@ -1,0 +1,30 @@
+:{$PORT} {
+    @checkout host pay.coupi-pg-test.onrender.com
+    handle @checkout {
+        reverse_proxy 127.0.0.1:7000
+    }
+
+    @api host pay-api.coupi-pg-test.onrender.com
+    handle @api {
+        reverse_proxy 127.0.0.1:6100
+    }
+
+    @admin host pay-admin.coupi-pg-test.onrender.com
+    handle @admin {
+        reverse_proxy 127.0.0.1:6001
+    }
+
+    @gmail host pay-gmail.coupi-pg-test.onrender.com
+    handle @gmail {
+        reverse_proxy 127.0.0.1:6003
+    }
+
+    @store host pay-store.coupi-pg-test.onrender.com
+    handle @store {
+        reverse_proxy 127.0.0.1:5000
+    }
+
+    handle {
+        reverse_proxy 127.0.0.1:7000
+    }
+}
