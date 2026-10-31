@@ -1,0 +1,23 @@
+name: Keep CouPI PG Awake
+
+on:
+  schedule:
+    - cron: "2,12,22,32,42,52 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  keep-alive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+
+    steps:
+      - name: Check Control Center
+        run: |
+          curl --fail-with-body \
+            --silent \
+            --show-error \
+            --max-time 90 \
+            https://coupi-pg-test.onrender.com/health
